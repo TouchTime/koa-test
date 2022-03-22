@@ -7,8 +7,8 @@ const { v4: uuidv4 } = require('uuid');
 
 const app = new Koa();
 const router = new Router();
-let fileName = 'database.json';
-let type = 'utf8';
+const fileName = 'database.json';
+const type = 'utf8';
 let list = JSON.parse(fs.readFileSync(fileName, type));
 
 // add url-route:
@@ -29,9 +29,6 @@ router.get('/getName', async (ctx, next) => {
 			ctx.body = { errorMessage: message };
 			return;
 		}
-	} else {
-		// ctx.body = list;
-		// return;
 	}
 
 	// 分页处理 page、size有效的情况下查询
@@ -82,7 +79,7 @@ router.put('/name/:id', async (ctx, next) => {
 });
 
 // 返回一个文件、设置response 、304
-
+// 抽取类
 //由于middleware的顺序很重要，这个koa-bodyparser必须在router之前被注册到app对象上
 app.use(bodyParser());
 // add router middleware:
