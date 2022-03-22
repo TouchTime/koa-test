@@ -11,27 +11,6 @@ let fileName = 'database.json';
 let type = 'utf8';
 let list = JSON.parse(fs.readFileSync(fileName, type));
 
-// app.use(async (ctx) => {
-// 	ctx.body = 'hello koa2'
-
-// })
-// let list = [
-// 	{
-// 		name: 'zhangsan',
-// 		id: '1',
-// 		age: 12,
-// 	},
-// 	{
-// 		name: 'lisi',
-// 		id: '2',
-// 		age: 14,
-// 	},
-// 	{
-// 		name: 'wangwu',
-// 		id: '3',
-// 		age: 17,
-// 	},
-// ];
 // add url-route:
 router.get('/getName', async (ctx, next) => {
 	const { name, page, size } = ctx.query;
@@ -56,15 +35,14 @@ router.get('/getName', async (ctx, next) => {
 	}
 
 	// 分页处理 page、size有效的情况下查询
-	// splice()处理
+	// slice()处理
 	if (page > 0 && size > 0) {
-		let newList = [...list];
+		// let newList = [...list];
 		const allSize = Number(size);
 		const allPage = Number(page);
 		const index = (allPage - 1) * allSize;
-		let lenth = allPage * allSize < list.length ? allSize : list.length;
-		let result = newList.splice(index, lenth);
-		ctx.body = result;
+		let lenth = allPage * allSize < list.length ? allSize + index : list.length;
+		ctx.body = list.slice(index, lenth);
 		return;
 	}
 
@@ -102,6 +80,8 @@ router.put('/name/:id', async (ctx, next) => {
 		ctx.body = { message: 'error' };
 	}
 });
+
+// 返回一个文件、设置response 、304
 
 //由于middleware的顺序很重要，这个koa-bodyparser必须在router之前被注册到app对象上
 app.use(bodyParser());
