@@ -8,7 +8,7 @@ const fs = require("fs");
 const path = require("path");
 const fileName = path.resolve("./", "src/mock/test.txt");
 const type = "utf8";
-const data = "文件流";
+let data = "文件流";
 
 const readStreamFun = () => {
   // 创建可读流
@@ -17,15 +17,15 @@ const readStreamFun = () => {
   readerStream.setEncoding(type);
 
   // 处理流事件 --> data, end, and error
-  readerStream.on("data", (chunk) => {
+  readerStream.once("data", (chunk) => {
     data += chunk;
   });
 
-  readerStream.on("end", () => {
+  readerStream.once("end", () => {
     console.log(data);
   });
 
-  readerStream.on("error", (err) => {
+  readerStream.once("error", (err) => {
     console.log(err.stack);
   });
 
@@ -42,11 +42,11 @@ const writeStreamFun = () => {
   writerStream.end();
 
   // 处理流事件 --> finish、error
-  writerStream.on("finish", () => {
+  writerStream.once("finish", () => {
     console.log("写入完成。");
   });
 
-  writerStream.on("error", (err) => {
+  writerStream.once("error", (err) => {
     console.log(err.stack);
   });
 };
