@@ -1,4 +1,9 @@
-const fs = require('fs');
+/*
+ * @Description  : 文件内容读写
+ * @Author       : huyanyan
+ * @Date         : 2022-03-23 09:21:28
+ */
+const fs = require("fs");
 
 // 同步写入方法 writeFileSync
 // fs.writeFileSync('2', 'hellos world');
@@ -7,23 +12,23 @@ const fs = require('fs');
 // console.log(data);
 
 // 异步写入方法writeFile
-const fileName = 'datbase.json';
+const fileName = "datbase.json";
 let list = [
-	{
-		name: 'zhangsan',
-		id: '1',
-		age: 12,
-	},
-	{
-		name: 'lisi',
-		id: '2',
-		age: 14,
-	},
-	{
-		name: 'wangwu',
-		id: '3',
-		age: 17,
-	},
+  {
+    name: "zhangsan",
+    id: "1",
+    age: 12,
+  },
+  {
+    name: "lisi",
+    id: "2",
+    age: 14,
+  },
+  {
+    name: "wangwu",
+    id: "3",
+    age: 17,
+  },
 ];
 // const replacer = (key, value) => {
 // 	console.log(key);
@@ -31,15 +36,15 @@ let list = [
 // };
 // let arr = JSON.stringify(list, replacer, 2);
 // console.log(arr);
-const type = 'utf8';
+const type = "utf8";
 // JSON.stringify(value[, replacer [, space]])
-// fs.writeFile(fileName, JSON.stringify({ list }, null, 2), (err) => {
-// 	if (!err) {
-// 		fs.readFile(fileName, type, (err, data) => {
-// 			console.log(data);
-// 		});
-// 	}
-// });
+fs.writeFile(fileName, JSON.stringify({ list }, null, 2), (err) => {
+  if (!err) {
+    fs.readFile(fileName, type, (err, data) => {
+      console.log(data);
+    });
+  }
+});
 // fs.unlink(fileName, (err) => {
 // 	console.log(err, 1222);
 // });
