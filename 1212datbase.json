@@ -1,0 +1,19 @@
+{
+  "list": [
+    {
+      "name": "zhangsan",
+      "id": "1",
+      "age": 12
+    },
+    {
+      "name": "lisi",
+      "id": "2",
+      "age": 14
+    },
+    {
+      "name": "wangwu",
+      "id": "3",
+      "age": 17
+    }
+  ]
+}

@@ -1,8 +1,13 @@
-const fs = require('fs');
-const { readFile } = require('fs/promises');
-const type = 'utf8';
+/*
+ * @Description  : 页面读取转换
+ * @Author       : huyanyan
+ * @Date         : 2022-03-24 09:21:23
+ */
+const fs = require("fs");
+const { readFile } = require("fs/promises");
+const type = "utf8";
 const staticData = {
-	home: 'index.html',
+  home: "index.html",
 };
 
 /**
@@ -10,16 +15,16 @@ const staticData = {
  * @param {string} name 显示的页面名称
  */
 const readHtmlFile = (name) => {
-	// return new Promise((resolve, reject) => {
-	// 	fs.readFile(staticData[name], type, (err, data) => {
-	// 		if (err) {
-	// 			reject(err);
-	// 		} else {
-	// 			resolve(data);
-	// 		}
-	// 	});
-	// });
-	return readFile(staticData[name], type);
+  // return new Promise((resolve, reject) => {
+  // 	fs.readFile(staticData[name], type, (err, data) => {
+  // 		if (err) {
+  // 			reject(err);
+  // 		} else {
+  // 			resolve(data);
+  // 		}
+  // 	});
+  // });
+  return readFile(staticData[name], type);
 };
 
 exports.readHtmlFile = readHtmlFile;

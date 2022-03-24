@@ -12,7 +12,7 @@ const fs = require("fs");
 // console.log(data);
 
 // 异步写入方法writeFile
-const fileName = "datbase.json";
+const fileName = "1212datbase.json";
 let list = [
   {
     name: "zhangsan",
