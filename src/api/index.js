@@ -5,6 +5,7 @@
  */
 const Koa = require("koa");
 const Router = require("koa-router");
+const fs = require("fs");
 const DataBase = require("../common/index");
 const HandleHtml = require("../common/handleHtml");
 // 解析request的body的功能(post请求)
@@ -13,7 +14,7 @@ const { v4: uuidv4 } = require("uuid");
 const dataBaseMode = new DataBase.DataBase();
 const path = require("path");
 const pathUrl = path.resolve(process.cwd(), "src/mock");
-const fileName = path.resolve("./", "src/mock/test.txt");
+const filePath = path.resolve("./", "src/mock/test.txt");
 const app = new Koa();
 const router = new Router();
 let list = dataBaseMode.getData();
@@ -87,9 +88,14 @@ router.put("/updateName/:id", async (ctx, next) => {
   }
 });
 
-// 返回一个文件(Stream)
+// 返回一个文件(Stream)、修改文件名称
 router.get("/file", async (ctx) => {
-  let file = dataBaseMode.readStreams(fileName);
+  const { fileName } = ctx.query;
+  let file = "";
+  file = dataBaseMode.readStreams(filePath, ctx);
+  // 设置下载文件流名称（兼容中文）
+  const handleName = encodeURIComponent(fileName);
+  ctx.set("Content-disposition", "attachment; filename=" + handleName);
   ctx.body = file;
 });
 

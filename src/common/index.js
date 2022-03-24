@@ -39,12 +39,13 @@ class DataBase {
   }
   /**
    * 读取文件流
-   * @param {string} fileName 文件路径
+   * @param {string} filePath 文件路径
+   * @param {string} res 设置数据
    */
-  readStreams(fileName) {
+  readStreams(filePath, res) {
     let data = "";
-    // 创建可读流
-    let readerStream = fs.createReadStream(fileName);
+    let readerStream = fs.createReadStream(filePath);
+
     // 设置编码为 utf8。
     readerStream.setEncoding(type);
 
