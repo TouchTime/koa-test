@@ -72,6 +72,7 @@ class DataBase {
   setName(ctx, fileName) {
     // 设置下载文件流名称（兼容中文）
     const handleName = encodeURIComponent(fileName);
+    // Content-disposition 是 MIME 协议的扩展，MIME 协议指示 MIME 用户代理如何显示附加的文件
     ctx.set("Content-disposition", "attachment; filename=" + handleName);
   }
 }

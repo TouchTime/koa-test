@@ -6,6 +6,7 @@
 const Koa = require("koa");
 const Router = require("koa-router");
 const fs = require("fs");
+const PortIsOccupied = require("../common/net");
 const DataBase = require("../common/index");
 const HandleHtml = require("../common/handleHtml");
 // 解析request的body的功能(post请求)
@@ -18,6 +19,9 @@ const filePath = path.resolve("./", "src/mock/test.txt");
 const app = new Koa();
 const router = new Router();
 let list = dataBaseMode.getData();
+let port = 3001;
+
+// 跨域设置 --最流行的跨域方案CORS（跨域资源共享）
 
 // 查询用户（支持分页）
 router.get("/getName", async (ctx, next) => {
@@ -129,8 +133,6 @@ router.put("/rename", async (ctx) => {
 
 // 设置response 、304
 
-// 跨域设置
-
 // 文件上传
 
 // 抽取类
@@ -138,5 +140,11 @@ router.put("/rename", async (ctx) => {
 app.use(bodyParser());
 // add router middleware:
 app.use(router.routes());
-console.log(pathUrl);
-app.listen(3000);
+// console.log(PortIsOccupied, PortIsOccupied.portIsOccupied(port));
+// let newPort = "";
+// // 监听端口，若是端口被占，则加+1
+// if (PortIsOccupied.portIsOccupied(port)) {
+//   newPort = Number(port) + 1;
+//   console.log(newPort);
+// }
+app.listen(port);
