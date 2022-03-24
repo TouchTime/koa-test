@@ -91,11 +91,10 @@ router.put("/updateName/:id", async (ctx, next) => {
 // 返回一个文件(Stream)、修改文件名称
 router.get("/file", async (ctx) => {
   const { fileName } = ctx.query;
-  let file = "";
-  file = dataBaseMode.readStreams(filePath, ctx);
-  // 设置下载文件流名称（兼容中文）
-  const handleName = encodeURIComponent(fileName);
-  ctx.set("Content-disposition", "attachment; filename=" + handleName);
+  // 返回文件流
+  let file = dataBaseMode.readStreams(filePath, ctx);
+  // 设置文件名称
+  dataBaseMode.setName(ctx, fileName);
   ctx.body = file;
 });
 

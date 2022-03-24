@@ -40,9 +40,8 @@ class DataBase {
   /**
    * 读取文件流
    * @param {string} filePath 文件路径
-   * @param {string} res 设置数据
    */
-  readStreams(filePath, res) {
+  readStreams(filePath) {
     let data = "";
     let readerStream = fs.createReadStream(filePath);
 
@@ -63,6 +62,17 @@ class DataBase {
     });
 
     return readerStream;
+  }
+
+  /**
+   * 修改下载的文件流名称
+   * @param {string} ctx 响应数据
+   * @param {string} fileName 文件名称
+   */
+  setName(ctx, fileName) {
+    // 设置下载文件流名称（兼容中文）
+    const handleName = encodeURIComponent(fileName);
+    ctx.set("Content-disposition", "attachment; filename=" + handleName);
   }
 }
 
