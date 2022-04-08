@@ -7,6 +7,7 @@
     "start": "nodemon src/api/index.js",
     "read": "nodemon src/api/read.js",
     "stream": "nodemon src/api/stream.js",
+    "apiDoc":"apidoc -i src/router/ -o apidoc/ && cross-env NODE_ENV=development nodemon index.js --watch ./",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -18,6 +19,11 @@
     "koa": "^2.13.4",
     "koa-bodyparser": "^4.3.0",
     "koa-router": "^10.1.1",
+    "koa-static": "^5.0.0",
     "uuid": "^8.3.2"
+  },
+  "apidoc": {  
+    "title": "接口文档", 
+    "url": "http://localhost:3000" 
   }
 }

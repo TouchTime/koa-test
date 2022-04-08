@@ -6,6 +6,7 @@
 const Koa = require("koa");
 const Router = require("koa-router");
 const fs = require("fs");
+const KoaStatic = require("koa-static");
 const PortIsOccupied = require("../common/net");
 const DataBase = require("../common/index");
 const HandleHtml = require("../common/handleHtml");
@@ -19,7 +20,20 @@ const filePath = path.resolve("./", "src/mock/test.txt");
 const app = new Koa();
 const router = new Router();
 let list = dataBaseMode.getData();
-let port = 3001;
+let port = 3000;
+
+// app.use(
+//   KoaStatic(
+//     path.resolve(process.cwd() + "/src/static"), // 开放的文件夹 __dirname为当前运行文件的目录  目前看来 只能开放文件夹 无法开放单独一个文件
+//     {
+//       index: false, // 默认为true  访问的文件为index.html  可以修改为别的文件名或者false
+//       hidden: false, // 是否同意传输隐藏文件
+//       defer: true, // 如果为true，则在返回next()之后进行服务，从而允许后续中间件先进行响应
+//     }
+//   )
+// );
+
+// console.log(__dirname, path.resolve(process.cwd() + "/src/static"));
 
 // 跨域设置 --最流行的跨域方案CORS（跨域资源共享）
 
@@ -101,6 +115,8 @@ router.get("/file", async (ctx) => {
   dataBaseMode.setName(ctx, fileName);
   ctx.body = file;
 });
+
+//
 
 // 返回一个html
 router.get("/", async (ctx) => {

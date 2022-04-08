@@ -74,6 +74,8 @@ class DataBase {
     const handleName = encodeURIComponent(fileName);
     // Content-disposition 是 MIME 协议的扩展，MIME 协议指示 MIME 用户代理如何显示附加的文件
     ctx.set("Content-disposition", "attachment; filename=" + handleName);
+    // Content-Length 显示进度条
+    // ctx.set("Content-Length", "attachment; filename=" + handleName);
   }
 }
 
