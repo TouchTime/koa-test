@@ -1,0 +1,33 @@
+<!--
+ * @Description  : 接收消息
+ * @Author       : huyanyan
+ * @Date         : 2022-04-14 14:11:39
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title>接收消息</title>
+</head>
+<body>
+                  <!-- 这个页面用来接收信息（获取localStorage的值 ） -->
+      <h1>收到消息：<span id="recMsg1" ></span></h1>
+      <h1>收到消息：<span id="recMsg2" ></span></h1>
+      <script>
+            // addEventListener 绑定事件监听
+            // storage事件，是localStorage特有的事件，只要localStorage中的内容发生改变就会触发该事件（非己页面才能触发）
+            render()
+            function render(){
+                  recMsg1.innerHTML = localStorage.getItem('msg1')//获取localStorage中msg1的值
+                  recMsg2.innerHTML = localStorage.getItem('msg2')//获取localStorage中msg2的值
+            }
+            window.addEventListener('storage',()=>{
+                  render()
+            })                 
+ 
+      </script>
+ 
+</body>
+</html>
